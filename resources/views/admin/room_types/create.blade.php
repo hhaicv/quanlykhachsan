@@ -17,6 +17,20 @@
             <label for="fullnameInput" class="form-label">Loại Phòng</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="Nhập loại phòng">
         </div>
+        <div class="col-md-6">
+            <label for="fullnameInput" class="form-label">Kích Thước</label>
+            <input type="text" class="form-control" id="size" name="size" placeholder="Nhập kích thước">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputState" class="form-label">Dịch Vụ</label>
+            <select class="form-select" name="services[]" id="services" multiple>
+                @foreach($services as $id => $name)
+                    <option value="{{ $id }}">{{ $name }}</option>
+                @endforeach
+            </select>
+        </div>
+
         <div class="col-lg-6">
             <div class="card mt-3">
                 <div class="card-header">

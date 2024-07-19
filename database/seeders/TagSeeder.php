@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class TagSeeder extends Seeder
 {
@@ -12,6 +13,9 @@ class TagSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('tags')->insert([
+            'name'=>'Hồ bơi',
+            'description'=>'Hồ bơi nóng',
+        ]);
     }
 }

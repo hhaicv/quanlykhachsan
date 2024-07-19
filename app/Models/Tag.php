@@ -12,4 +12,9 @@ class Tag extends Model
         'name',
         'description',
     ];
+
+    public function rooms()
+    {
+        return $this->belongsToMany(room::class);
+    }
 }

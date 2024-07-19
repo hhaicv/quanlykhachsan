@@ -22,7 +22,7 @@ class RoomController extends Controller
     public function index()
     {
         $data = room::query()->with('tags')->latest('id')->get();
-
+     
         return view(self::PATH_VIEW.__FUNCTION__, compact('data'));
     }
 
@@ -127,7 +127,10 @@ class RoomController extends Controller
     public function destroy(string $id)
     {
         $data = room::query()->findOrFail($id);
+        $data->roomTags();
+        dd($data);
         $data->delete();
         return back();
+    
     }
 }

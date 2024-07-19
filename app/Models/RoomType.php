@@ -12,6 +12,7 @@ class RoomType extends Model
         'name',
         'cover',
         'description',
+        'size',
         'maxOccupancy',
         'is_active',
     ];
@@ -19,4 +20,9 @@ class RoomType extends Model
     protected $casts = [
         'is_active'=>'boolean',
     ];
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

@@ -35,11 +35,12 @@
                             <th>ID</th>
                             <th>Loại Phòng</th>
                             <th>Hình Ảnh</th>
+                            <td>Kích Thước</td>
                             <th>Số Người</th>
                             <th>Mô Tả</th>
+                            <th>Dịch Vụ</th>
                             <th>Is_Action</th>
-                            <th>Create_at</th>
-                            <th>Update_at</th>
+                           
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -49,13 +50,16 @@
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
                             <td><img width="80px" src="{{ Storage::url($item->cover) }}" alt=""></td>
+                            <td>{{$item->size}}</td>
                             <td>{{$item->maxOccupancy}}</td>
                             <td>{{$item->description}}</td>
-                           
+                            <td>
+                                @foreach($item->services as $service)
+                                    <span class="badge bg-info">{{ $service->name }}</span>
+                                @endforeach
+                            </td>
                             <td>{!! $item->is_active ?  '<span class="badge bg-success-subtle text-success">Active</span>'
                             : '<span class="badge bg-danger-subtle text-danger">Disabled</span>' !!}</td>
-                            <td>{{$item->created_at}}</td>
-                            <td>{{$item->updated_at}}</td>
                             <td>
                                 <div class="hstack gap-3 fs-15">
                                     <a href="{{ route('admin.room_types.edit', $item->id) }}" class="link-primary"><i class="ri-settings-4-line"></i></a>

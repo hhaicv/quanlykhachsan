@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoomType;
 use App\Http\Requests\StoreRoomTypeRequest;
 use App\Http\Requests\UpdateRoomTypeRequest;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,7 +23,7 @@ class RoomTypeController extends Controller
 
     public function index()
     {
-        $data= RoomType::query()->latest('id')->get();
+        $data= RoomType::query()->with('services')->latest('id')->get();
         return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
     }
 
@@ -31,7 +32,8 @@ class RoomTypeController extends Controller
      */
     public function create()
     {
-        return view(self::PATH_VIEW . __FUNCTION__);
+        $services = Service::query()->pluck('name', 'id')->all();
+        return view(self::PATH_VIEW . __FUNCTION__, compact('services'));
     }
 
     /**
@@ -42,13 +44,16 @@ class RoomTypeController extends Controller
         $data = $request->except('cover');
 
         $data['is_active'] ??= 0;
+        $dataService = $request->services;
 
         // lấy toàn bộ input nhưng không lấy file upload
         if($request->hasFile('cover')){
             // kiểm tra xem có upload file không
             $data['cover']=Storage::put(self::PATH_UPLOAD, $request->file('cover'));
         }
-        RoomType::query()->create($data);
+        $model=RoomType::query()->create($data);
+        $model->services()->sync($dataService);
+
         return redirect()->route("admin.room_types.index");
     }
 
@@ -65,8 +70,11 @@ class RoomTypeController extends Controller
      */
     public function edit(string $id)
     {
-        $data= RoomType::query()->findOrFail($id);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        $data= RoomType::query()->with('services')->findOrFail($id);
+        $allService = Service::all();
+        $services = $data->services()->pluck('id')->toArray();
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'allService','services'));
     }
 
     /**
@@ -75,9 +83,10 @@ class RoomTypeController extends Controller
     public function update(UpdateRoomTypeRequest $request, string $id)
     {
         $model = RoomType::query()->findOrFail($id);
-        $data = $request->except(['cover']);
+        $data = $request->except(['cover', 'services']);
         $data['is_active'] ??= 0;
 
+        $dataService = $request->services;
         if($request->hasFile('cover')){
             $data['cover']=Storage::put(self::PATH_UPLOAD, $request->file('cover'));
         }
@@ -85,7 +94,7 @@ class RoomTypeController extends Controller
         $currentCover = $model->cover;
 
         $model->update($data);
-
+        $model->services()->sync($dataService);
         if ($request->hasFile('cover') && $currentCover && Storage::exists($currentCover)) {
             Storage::delete($currentCover);
         }
@@ -99,6 +108,7 @@ class RoomTypeController extends Controller
     public function destroy(string $id)
     {
         $model = RoomType::query()->findOrFail($id);
+        $model->services()->sync([]);
         $model->delete();
         if ($model->delete() && Storage::exists($model->delete())) {
             Storage::delete($model->delete());

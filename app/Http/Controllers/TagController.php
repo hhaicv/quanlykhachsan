@@ -74,6 +74,7 @@ class TagController extends Controller
     public function destroy(string $id)
     {
         $data = Tag::query()->findOrFail($id);
+        $data->rooms()->sync([]);
         $data->delete();
         return back();
     }

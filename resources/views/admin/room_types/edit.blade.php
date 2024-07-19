@@ -18,6 +18,23 @@
                 <label for="fullnameInput" class="form-label">Loại Phòng</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{$data->name}}">
             </div>
+            <div class="col-md-6">
+                <label for="fullnameInput" class="form-label">Kích Thước</label>
+                <input type="text" class="form-control" id="size" name="size" value="{{ $data->size }}">
+            </div>
+    
+            <div class="col-md-6">
+                <label for="inputState" class="form-label">Dịch Vụ</label>
+                <select class="form-control" name="services[]" multiple="multiple">
+                    @foreach ($allService as $service)
+                        <option value="{{ $service->id }}"
+                            @if (in_array($service->id, $services)) selected @endif>
+                            {{ $service->name }}
+                        </option>
+                    @endforeach
+                </select>
+
+            </div>
             <div class="col-lg-6">
                 <div class="card mt-3">
                     <div class="card-header">

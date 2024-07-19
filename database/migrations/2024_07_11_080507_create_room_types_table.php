@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->string('cover')->nullable();
+            $table->string('size');
             $table->text('description')->nullable();
             $table->string('maxOccupancy');
             $table->boolean('is_active')->default(true);
