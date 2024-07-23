@@ -34,9 +34,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Tiện Ích</th>
+                            <th>Icon</th>
                             <th>Mô Tả</th>
-                            <th>Create_at</th>
-                            <th>Update_at</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -45,9 +44,8 @@
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
+                            <td><i class="{{$item->icon}}"></i></td>
                             <td>{{$item->description}}</td>
-                            <td>{{$item->created_at}}</td>
-                            <td>{{$item->updated_at}}</td>
                             <td>
                                 <div class="hstack gap-3 fs-15">
                                     <a href="{{ route('admin.tags.edit', $item->id) }}" class="link-primary"><i class="ri-settings-4-line"></i></a>

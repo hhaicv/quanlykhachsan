@@ -18,6 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/client/css/bootstrap-select.min.css') }}">
     {{-- <link rel="stylesheet" type="text/css" href="../../../../cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css" /> --}}
     <!-- MAIN STYLE -->
+    <script src="https://kit.fontawesome.com/24d8b82fa8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('theme/client/css/styles.css') }}">
 </head>
 <body>

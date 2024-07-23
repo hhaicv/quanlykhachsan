@@ -34,10 +34,7 @@
                                     <label class="form-label" for="product-title-input">Tên Phòng</label>
                                     <input type="text" class="form-control" id="product-title-input" name="name" placeholder="Enter product title" required>
                                 </div>
-                                <div class="mt-3">
-                                    <label for="content" class="form-label">Mô tả</label>
-                                    <textarea name="content" id="content" class="form-control"></textarea>
-                                 </div>
+                              
                             </div>
                         </div>
                         <!-- end card -->
@@ -91,6 +88,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mt-3">
+                                    <label for="content" class="form-label">Mô tả</label>
+                                    <textarea name="content" id="content" rows="9" class="form-control"></textarea>
+                                 </div>
+                            </div>
+                        </div>
                         <!-- end card -->
 
                         <!-- end card -->
@@ -112,26 +117,53 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="choices-publish-status-input" class="form-label">Số Phòng</label>
-                                    <input type="number" name="room_number" class="form-control" placeholder="Số phòng">
+                                    <label for="choices" class="form-label">Số Phòng</label>
+                                    <input type="number" name="quantity" class="form-control" placeholder="Số phòng">
                                 </div>
+                                
+                                <div class="mb-3">
+                                    <label for="choices-publish-status-input" class="form-label">Số Người</label>
+                                    <input type="text" name="max_people" class="form-control" placeholder="Nhập số người">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="choices-publish-status-input" class="form-label">Kích Thước</label>
+                                    <input type="text" name="size" class="form-control" placeholder="Nhập diện tích phòng">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="choices-publish-status-input" class="form-label">Giường</label>
+                                    <input type="text" name="bed" class="form-control" placeholder="Nhập loại giường">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="choices-publish-status-input" class="form-label">View</label>
+                                    <input type="text" name="view" class="form-control" placeholder="Nhập view">
+                                </div>
+                            
                             </div>
+                          
                             <!-- end card body -->
                         </div>
                         
+                        
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title mb-0">Loại Phòng</h5>
+                                <h5 class="card-title mb-0">Dịch Vụ</h5>
                             </div>
                             <div class="card-body">
-                                <p class="text-muted mb-2"> <a href="{{ route('admin.room_types.create') }}" class="float-end text-decoration-underline nav-link">Thêm mới</a>Chọn loại phòng</p>
-                                <select class="form-control" data-choices name="room_type_id" id="choices-single-default">
-                                    @foreach($data as $item)
-                                        <option value="{{$item->id}}">{{$item->name}}</option>
-                                    @endforeach
-                                </select>
+                                <div class="hstack gap-3 align-items-start">
+                                    <div class="flex-grow-1">
+                                        <select class="form-select" name="services[]" id="services" multiple>
+                                            @foreach($services as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                        
+                                    </div>
+                                </div>
                             </div>
-                            <!-- end card body -->
+                   
                         </div>
                         <!-- end card -->
                         <div class="card">

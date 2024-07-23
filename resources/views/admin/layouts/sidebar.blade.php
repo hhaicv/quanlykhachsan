@@ -40,28 +40,6 @@
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
                 </li> <!-- end Dashboard Menu -->
-
-
-                <li class="nav-item">
-                    <a class="nav-link menu-link" href="#sidebarCatalogues" data-bs-toggle="collapse" role="button"
-                       aria-expanded="false" aria-controls="sidebarCatalogues">
-                        <i class="ri-layout-3-line"></i>
-                        <span data-key="t-layouts">Loại Phòng</span>
-
-                    </a>
-                    <div class="collapse menu-dropdown" id="sidebarCatalogues">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a href="{{route('admin.room_types.index')}}" class="nav-link"
-                                   data-key="t-horizontal">Danh sách</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('admin.room_types.create')}}" class="nav-link"
-                                   data-key="t-horizontal">Thêm mới</a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link menu-link" href="#sidebarRoom" data-bs-toggle="collapse" role="button"
                        aria-expanded="false" aria-controls="sidebarRoom">

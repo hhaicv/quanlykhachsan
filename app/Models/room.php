@@ -11,22 +11,25 @@ class room extends Model
 
     protected $fillable = [
         'name',
-        'room_number',
+        'quantity',
+        'size',
+        'view',
+        'bed',
+        'max_people',
         'cover',
         'images',
         'price',
         'content',
-        'room_type_id',
         'status',
     ];
 
-    public function room_type(){
-        return $this->belongsTo(RoomType::class);
-    }
     public function tags()
     {
         return $this->belongsToMany(Tag::class);
     }
 
-
+    public function services()
+    {
+        return $this->belongsToMany(Service::class);
+    }
 }

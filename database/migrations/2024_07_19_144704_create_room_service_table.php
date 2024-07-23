@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\RoomType;
+use App\Models\room;
 use App\Models\Service;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('room_type_service', function (Blueprint $table) {
-
-            $table->foreignIdFor(RoomType::class)->constrained();
+        Schema::create('room_service', function (Blueprint $table) {
+     
+            $table->foreignIdFor(room::class)->constrained();
             $table->foreignIdFor(Service::class)->constrained();
  
-            $table->primary(['room_type_id','service_id']);
+            $table->primary(['room_id','service_id']);
 
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('room_type_service');
+        Schema::dropIfExists('room_service');
     }
 };

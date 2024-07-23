@@ -13,6 +13,10 @@ class Service extends Model
         'name',
         'image',
         'description',
-   
     ];
+
+    public function rooms()
+    {
+        return $this->belongsToMany(room::class);
+    }
 }

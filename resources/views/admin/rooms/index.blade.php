@@ -34,12 +34,8 @@
                         <tr>
                             <th>ID</th>
                             <th>Tên Phòng</th>
-                            <th>Số Phòng</th>
                             <th>Hình Ảnh</th>
                             <th>Giá</th>
-                            <th>Kiểu Phòng</th>
-                            <th>Tiện Ích</th>
-                            <th>Trạng Thái</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -48,21 +44,14 @@
                         <tr>
                             <td>{{$item->id}}</td>
                             <td>{{$item->name}}</td>
-                            <td>{{$item->room_number }}</td>
+                   
                             <td><img width="80px" src="{{ Storage::url($item->cover) }}" alt=""></td>
                             {{-- <?php
                             // $images = json_decode($item->images);
                             // $image = $images[0];
                             //     ?>
                             <td><img width="80px" src="{{ Storage::url("$image") }}" alt=""></td> --}}
-                            <td>{{number_format($item->price, 0, ',', '.')}}VNĐ</td>
-                            <td>{{$item->room_type->name}}</td>
-                            <td>
-                                @foreach($item->tags as $tag)
-                                    <span class="badge bg-info">{{ $tag->name }}</span>
-                                @endforeach
-                            </td>
-                            <td><span class="badge bg-primary">{{$item->status}}</span></td>
+                            <td>{{number_format($item->price, 0, ',', '.')}}VNĐ/Đêm</td>
                             <td>
                                 <div class="dropdown d-inline-block">
                                     <button class="btn btn-soft-secondary btn-sm dropdown"

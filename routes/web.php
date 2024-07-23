@@ -15,25 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $data = \App\Models\RoomType::query()->latest('id')->get();
+    $rooms = \App\Models\room::query()->get();
     $service = \App\Models\Service::query()->get();
-    return view('client.home.index', compact('data','service'));
+    return view('client.home.index', compact('service', 'rooms'));
 });
 
-// Route::prefix('client')
-//     ->as('client.')
-//     ->group(function () {
-//         Route::get('/', function () {
-//             return view('client.index');
-//         })->name('index');
-        // Route::prefix('room_types')
-        //     ->as('room_types.')
-        //     ->group(function () {
-        //         Route::get('/',                 [RoomTypeController::class, 'index'])->name('index');
-        //         Route::get('create',            [RoomTypeController::class, 'create'])->name('create');
-        //         Route::post('store',            [RoomTypeController::class, 'store'])->name('store');
-        //         Route::get('{id}/edit',         [RoomTypeController::class, 'edit'])->name('edit');
-        //         Route::put('{id}/update',       [RoomTypeController::class, 'update'])->name('update');
-        //         Route::get('{id}/destroy',      [RoomTypeController::class, 'destroy'])->name('destroy');
-        //     });
-    // });
+Route::prefix('client')
+    ->as('client.')
+    ->group(function () {
+        Route::prefix('home')
+            ->as('home.')
+            ->group(function () {
+                Route::get('{id}/show',         [HomeController::class, 'show'])->name('show');
+            });
+    });

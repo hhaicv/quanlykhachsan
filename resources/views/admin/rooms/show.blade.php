@@ -35,7 +35,7 @@
                                             for ($i=0; $i < count($images); $i++) {
                                                 $image = $images[$i];
                                                 echo '<div class="swiper-slide">';
-                                                echo '<img class="img-fluid d-block" src="' . Storage::url($image) . '" alt="">';
+                                                echo '<img style="width: 385px;height: 355px; object-fit: cover;" class="img-fluid d-block" src="' . Storage::url($image) . '" alt="">';
                                                 echo '</div>';
                                             }
                                             ?>
@@ -52,7 +52,7 @@
                                                 $image = $images[$i];
                                                 echo '<div class="swiper-slide">';
                                                 echo '<div class="nav-slide-item">';
-                                                echo '<img class="img-fluid d-block" src="' . Storage::url($image) . '" alt="">';
+                                                echo '<img style="width: 76px;height: 70px; object-fit: cover;" class="img-fluid d-block" src="' . Storage::url($image) . '" alt="">';
                                                 echo '</div>';
                                                 echo '</div>';
                                             }
@@ -105,7 +105,23 @@
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <p class="text-muted mb-1">Số Phòng :</p>
-                                                        <h5 class="mb-0">{{ $data->room_number }}</h5>
+                                                        <h5 class="mb-0">{{ $data->quantity }}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- end col -->
+                                        {{-- <div class="col-lg-4 col-sm-6">
+                                            <div class="p-2 border border-dashed rounded">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-sm me-2">
+                                                        <div class="avatar-title rounded bg-transparent text-success fs-24">
+                                                            <i class="ri-stack-fill"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <p class="text-muted mb-1">Kiểu Phòng :</p>
+                                                        <h5 class="mb-0">{{ $data-> }}</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,13 +137,11 @@
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <p class="text-muted mb-1">Kiểu Phòng :</p>
-                                                        <h5 class="mb-0">{{ $data->room_type->name }}</h5>
+                                                        <h5 class="mb-0">{{ $data-> }}</h5>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <!-- end col -->
-                                       
+                                        </div> --}}
                                         <!-- end col -->
                                     </div>
 
@@ -140,9 +154,22 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-5">
                                             <div class="mt-3">
-                                                <h5 class="fs-14">Dịch Vụ :</h5>
+                                                <h5 class="fs-14">Chi tiết :</h5>
+                                                <ul class="list-unstyled product-desc-list">
+                                                    <span class="badge bg-info"></span>
+                                                    <li class="py-1"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i> {{ $data->bed }}</li>
+                                                    <li class="py-1"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i> {{ $data->size }}</li>
+                                                    <li class="py-1"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i> {{ $data->max_people }}</li>
+                                                    <li class="py-1"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i> {{ $data->view }}</li>
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="mt-3">
+                                                <h5 class="fs-14">Tiện Ích :</h5>
                                                 <ul class="list-unstyled">
                                                     @foreach($data->tags as $tag)
                                                         <span class="badge bg-info"></span>
@@ -152,15 +179,18 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="mt-3">
-                                                <h5 class="fs-14">Services :</h5>
+                                                <h5 class="fs-14">Dịch Vụ :</h5>
                                                 <ul class="list-unstyled product-desc-list">
-                                                    <li class="py-1">10 Days Replacement</li>
-                                                    <li class="py-1">Cash on Delivery available</li>
+                                                    @foreach($data->services as $service)
+                                                    <span class="badge bg-info"></span>
+                                                    <li class="py-1"><i class="mdi mdi-circle-medium me-1 text-muted align-middle"></i> {{ $service->name }}</li>
+                                                @endforeach
                                                 </ul>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                     <!-- end card body -->
                                 </div>

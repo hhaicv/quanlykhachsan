@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Home;
 use App\Http\Requests\StoreHomeRequest;
 use App\Http\Requests\UpdateHomeRequest;
+use App\Models\room;
 use App\Models\RoomType;
 
 class HomeController extends Controller
@@ -12,11 +13,11 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    const PATH_VIEW = "client.";
+    const PATH_VIEW = "client.home.";
     public function index()
     {
-        $data = RoomType::query()->get();
-        return view(self::PATH_VIEW.__FUNCTION__, compact('data')); 
+        // $data = RoomType::query()->get();
+        // return view(self::PATH_VIEW.__FUNCTION__, compact('data'));
     }
 
     /**
@@ -38,9 +39,11 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Home $home)
+    public function show(string $id)
     {
-        //
+        $room= room::query()->limit(4)->get();
+        $data=room::query()->with('tags','services')->findOrFail($id);
+        return view(self::PATH_VIEW.__FUNCTION__, compact('data', 'room'));
     }
 
     /**

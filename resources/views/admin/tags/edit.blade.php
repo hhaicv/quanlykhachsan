@@ -18,7 +18,11 @@
                 <label for="fullnameInput" class="form-label">Tiện Ích</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{$data->name}}">
             </div>
-            <div class="col-md-12">
+            <div class="col-md-6">
+                <label for="fullnameInput" class="form-label">Icon</label>
+                <input type="text" class="form-control" id="icon" name="icon" value="{{$data->icon}}">
+            </div>
+            <div class="col-md-6">
                 <label for="exampleFormControlTextarea5" class="form-label">Mô tả</label>
                 <textarea class="form-control" id="exampleFormControlTextarea5" name="description" rows="2">{{$data->description}}</textarea>
             </div>

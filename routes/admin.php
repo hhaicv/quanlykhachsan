@@ -14,16 +14,6 @@ Route::prefix('admin')
         Route::get('/', function () {
             return view('admin.dashboard');
         })->name('dashboard');
-        Route::prefix('room_types')
-            ->as('room_types.')
-            ->group(function () {
-                Route::get('/',                 [RoomTypeController::class, 'index'])->name('index');
-                Route::get('create',            [RoomTypeController::class, 'create'])->name('create');
-                Route::post('store',            [RoomTypeController::class, 'store'])->name('store');
-                Route::get('{id}/edit',         [RoomTypeController::class, 'edit'])->name('edit');
-                Route::put('{id}/update',       [RoomTypeController::class, 'update'])->name('update');
-                Route::get('{id}/destroy',      [RoomTypeController::class, 'destroy'])->name('destroy');
-            });
         Route::prefix('tags')
             ->as('tags.')
             ->group(function () {

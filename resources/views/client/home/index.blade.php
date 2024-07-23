@@ -83,165 +83,35 @@
 <!-- OUR-ROOMS-->
 <section class="rooms">
     <div class="container">
-        <h2 class="title-room">Our Rooms</h2>
+        <h2 class="title-room">Những căn phòng của chúng tôi</h2>
         <div class="outline"></div>
-        <p class="rooms-p">When you host a party or family reunion, the special celebrations let you streng then bonds with</p>
+        <p class="rooms-p">Khi bạn tổ chức một bữa tiệc hoặc đoàn tụ gia đình, những lễ kỷ niệm đặc biệt sẽ giúp bạn củng cố mối quan hệ với mọi người.</p>
         <div class="wrap-rooms">
             <div class="row">
                 <div id="rooms" class="owl-carousel owl-theme">
                 
                     <div class="item ">
-                        @foreach ($data as $item)
+        
+                        @foreach ($rooms as $item)
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img style="width: 370px;height: 255px; object-fit: cover;" src="{{ Storage::url($item->cover) }}" class="img-responsive" alt="{{ $item->name }}" title="{{ $item->name }}">
+                            <a href="{{ route('client.home.show', $item->id) }}">
+                                <div class="wrap-box">
+                                    <div class="box-img">
+                                        <img style="width: 370px;height: 255px; object-fit: cover;" src="{{ Storage::url($item->cover) }}" class="img-responsive" alt="{{ $item->name }}" title="{{ $item->name }}">
+                                    </div>
+                                    <div class="rooms-content">
+                                        <h4 class="sky-h4">{{ $item->name }}</h4>
+                                        <p class="price">{{number_format($item->price, 0, ',', '.')}}VNĐ/Đêm</p>
+                                    </div>
                                 </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">{{ $item->name }}</h4>
-                                    <p class="price">{{ $item->maxOccupancy }}</p>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         @endforeach
+                       
+                   
                     </div>
                    
-                    {{-- <div class="item ">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-1.jpg') }}" class="img-responsive" alt="PLuxury Room" title="Luxury Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Luxury Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-2.jpg') }}" class="img-responsive" alt="Double Room" title="Double Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Double Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-3.jpg') }}" class="img-responsive" alt="Family Room" title="Family Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Family Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-4.jpg') }}" class="img-responsive" alt="Deluxe Room" title="Deluxe Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Deluxe Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-5.jpg') }}" class="img-responsive" alt="Single Room" title="Single Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Single Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-6.jpg') }}" class="img-responsive" alt="Presidential Room" title="Presidential Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Presidential Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item ">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-1.jpg') }}" class="img-responsive" alt="PLuxury Room" title="Luxury Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Luxury Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-2.jpg') }}" class="img-responsive" alt="Double Room" title="Double Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Double Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-3.jpg') }}" class="img-responsive" alt="Family Room" title="Family Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Family Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-4.jpg') }}" class="img-responsive" alt="Deluxe Room" title="Deluxe Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Deluxe Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-5.jpg') }}" class="img-responsive" alt="Single Room" title="Single Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Single Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class=" col-lg-4 col-md-4 col-sm-6 col-xs-6 ">
-                            <div class="wrap-box">
-                                <div class="box-img">
-                                    <img src="{{ asset('theme/client/images/Home-1/our-6.jpg') }}" class="img-responsive" alt="Presidential Room" title="Presidential Room">
-                                </div>
-                                <div class="rooms-content">
-                                    <h4 class="sky-h4">Presidential Room</h4>
-                                    <p class="price">$320 / Per Night</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
+                  
                 </div>
             </div>
         </div>
@@ -255,11 +125,11 @@
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
                 <div class="about-centent">
-                    <h2 class="about-title">About Us</h2>
+                    <h2 class="about-title">SKYLINE HOTEL</h2>
                     <div class="line"></div>
-                    <p class="about-p">Contrary to popular belief, Lorem isn’t simply random text. It has roots in a of classical Latin literature from 45 BC, making it over 2000 years old. Avalon’s leading hotels with gracious island hospitality, thoughtful amenities and distinctive</p>
-                    <p class="about-p1">Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage ...</p>
-                    <a href="#" class="read-more">READ MORE </a>
+                    <p class="about-p">Là một trong những khách sạn nghỉ dưỡng đẳng cấp bậc nhất tại thành phố ven biển, khách sạn SKYLINE tập trung vào sự sang trọng mang hơi hướng của thời đại mới.</p>
+                    <p class="about-p1">Tinh tế từ thiết kế đến tiện nghi, cho dù bạn đi du lịch để thư giãn, nạp lại năng lượng hay nuông chiều bản thân, đội ngũ của chúng tôi cam kết mang đến một kỳ nghỉ mà bạn sẽ không bao giờ quên.</p>
+                    {{-- <a href="#" class="read-more">READ MORE </a> --}}
                 </div>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7 ">

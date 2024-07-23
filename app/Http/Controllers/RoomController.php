@@ -6,6 +6,7 @@ use App\Models\room;
 use App\Http\Requests\StoreroomRequest;
 use App\Http\Requests\UpdateroomRequest;
 use App\Models\RoomType;
+use App\Models\Service;
 use App\Models\Tag;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +22,7 @@ class RoomController extends Controller
 
     public function index()
     {
-        $data = room::query()->with('tags')->latest('id')->get();
+        $data = room::query()->latest('id')->get();
      
         return view(self::PATH_VIEW.__FUNCTION__, compact('data'));
     }
@@ -31,9 +32,10 @@ class RoomController extends Controller
      */
     public function create()
     {
-        $data=RoomType::get();
+    
+        $services = Service::query()->pluck('name', 'id')->all();
         $tags = Tag::query()->pluck('name', 'id')->all();
-        return view(self::PATH_VIEW.__FUNCTION__, compact('data', 'tags'));
+        return view(self::PATH_VIEW.__FUNCTION__, compact('services', 'tags'));
     }
 
     /**
@@ -42,11 +44,10 @@ class RoomController extends Controller
     public function store(StoreroomRequest $request)
     {
         $data=$request->except("images","cover");
-        
         $images=request()->file('images');
         $arrNameImage =[];
-        $dataProductTags = $request->tags;
-
+        $dataTags = $request->tags;
+        $dataServices = $request->services;
         if($request->hasFile('cover')){
             // kiểm tra xem có upload file không
             $data['cover']=Storage::put(self::PATH_UPLOAD, $request->file('cover'));
@@ -57,9 +58,10 @@ class RoomController extends Controller
            $arrNameImage[] = $nameImage;
         }
         $arrNameImage = json_encode($arrNameImage);
-        $room = room::query()->create($data);
-        $room->tags()->sync($dataProductTags);
 
+        $room = room::query()->create($data);
+        $room->tags()->sync($dataTags);
+        $room->services()->sync($dataServices);
         $room->update([
             'images' => $arrNameImage
         ]);
@@ -71,7 +73,7 @@ class RoomController extends Controller
      */
     public function show(string $id)
     {
-        $data=room::query()->with('tags')->findOrFail($id);
+        $data=room::query()->with('tags','services')->findOrFail($id);
         return view(self::PATH_VIEW.__FUNCTION__, compact('data'));
     }
 
@@ -80,12 +82,13 @@ class RoomController extends Controller
      */
     public function edit(string $id)
     {
-        $data=room::query()->with('tags')->findOrFail($id);
-        $model=RoomType::get();
+        $data=room::query()->with('tags','services')->findOrFail($id);
         $allTags = Tag::all();
+        $allServices= Service::all();
         // Lấy tất cả các tag liên kết với sản phẩm cụ thể
         $tags = $data->tags()->pluck('id')->toArray();
-        return view(self::PATH_VIEW.__FUNCTION__, compact('data', 'model', 'tags', 'allTags'));
+        $services = $data->services()->pluck('id')->toArray();
+        return view(self::PATH_VIEW.__FUNCTION__, compact('data', 'tags', 'allTags','allServices','services'));
     }
 
     /**
@@ -98,7 +101,7 @@ class RoomController extends Controller
         
         $images=request()->file('images');
         $arrNameImage =[];
-
+        $dataServices = $request->services;
         $dataProductTags = $request->tags;
 
         if($request->hasFile('cover')){
@@ -116,7 +119,8 @@ class RoomController extends Controller
             $model->update([
                 'images' => $arrNameImage
             ]);
-        }
+        }      
+        $model->services()->sync($dataServices);
         $model->tags()->sync($dataProductTags);
         return redirect()->route("admin.rooms.index");
     }
@@ -127,9 +131,12 @@ class RoomController extends Controller
     public function destroy(string $id)
     {
         $data = room::query()->findOrFail($id);
-        $data->roomTags();
-        dd($data);
+        $data->tags()->sync([]);
+        $data->services()->sync([]);
         $data->delete();
+        if ($data->delete() && Storage::exists($data->delete())) {
+            Storage::delete($data->delete());
+        }
         return back();
     
     }
