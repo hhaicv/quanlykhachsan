@@ -19,7 +19,8 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->enum('type', [ User::TYPE_ADMIN, User::TYPE_MEMBER ])->default(User::TYPE_MEMBER);
             $table->string('password');
-            $table->rememberToken();   
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 

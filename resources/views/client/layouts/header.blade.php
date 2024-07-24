@@ -1,5 +1,5 @@
 <header class="header-sky" style="background-color: black">
-    <div class="container" >
+    <div class="container">
         <!--HEADER-TOP-->
         <div class="header-top">
             <div class="header-top-left">
@@ -8,10 +8,17 @@
                 <span><i class="fa fa-phone" aria-hidden="true"></i> 0917 555 305</span>
             </div>
             <div class="header-top-right">
-                <ul>
-                    <li class="dropdown"><a href="login.html" title="LOGIN" class="dropdown-toggle">Đăng Nhập</a></li>
-                    <li class="dropdown"><a href="register.html" title="REGISTER" class="dropdown-toggle">Đăng Ký</a></li>
-                </ul>
+                @if (Route::has('login'))
+                    <ul>
+                        <li class="dropdown"><a href="{{ route('login') }}" title="LOGIN" class="dropdown-toggle">Đăng
+                                Nhập</a></li>
+                        @if (Route::has('register'))
+                            <li class="dropdown"><a href="{{ route('register') }}" title="REGISTER"
+                                    class="dropdown-toggle">Đăng Ký</a>
+                            </li>
+                        @endif
+                    </ul>
+                @endif
             </div>
         </div>
         <!-- END/HEADER-TOP -->
@@ -27,7 +34,8 @@
                         <span class="icon-bar "></span>
                         <span class="icon-bar "></span>
                     </button>
-                    <a class="navbar-brand" href="file:///E:/Xampp/htdocs/skyline/index.html" title="Skyline"><img src="{{ asset('theme/client/images/Home-1/sky-logo-header.png') }}" alt="#"></a>
+                    <a class="navbar-brand" href="file:///E:/Xampp/htdocs/skyline/index.html" title="Skyline"><img
+                            src="{{ asset('theme/client/images/Home-1/sky-logo-header.png') }}" alt="#"></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -35,7 +43,8 @@
                             <a href="index.html" title="Home" data-toggle="dropdown">Trang chủ</a>
                         </li>
                         <li class="dropdown ">
-                            <a href="room_1.html" title="Room & Rate" class="dropdown-toggle" data-toggle="dropdown">Phòng<b class="caret"></b></a>
+                            <a href="room_1.html" title="Room & Rate" class="dropdown-toggle"
+                                data-toggle="dropdown">Phòng<b class="caret"></b></a>
                             <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
                                 <li><a href="room_1.html" title="">Room 1</a></li>
                                 <li><a href="room_2.html" title="">Room 2</a></li>
