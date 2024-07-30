@@ -26,7 +26,7 @@ Route::get('{id}/show',         [HomeController::class, 'show'])->name('show');
 Route::get('room',         [HomeController::class, 'room'])->name('room');
 Route::get('cart',         [CartController::class, 'cart'])->name('cart');
 // Route::get('booking',         [HomeController::class, 'booking'])->name('booking');
-
+Route::post('/apply-discount', [CartController::class, 'applyDiscount']);
 Auth::routes();
 
 // Route::get('/', function () {

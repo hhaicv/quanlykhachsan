@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('address');
+            $table->integer('adult');
+            $table->integer('children');
+            $table->date('check_in_date');
+            $table->date('check_out_date');
             $table->string('note')->nullable();
             $table->integer('total_price');
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');

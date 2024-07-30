@@ -16,5 +16,11 @@ class promotion extends Model
         'start_date',
         'end_date'
     ];
+    public static function isValid($id)
+    {
+        return self::where('id', $id)
+                    ->where('end_date', '>=', now())
+                    ->first();
+    }
 
 }

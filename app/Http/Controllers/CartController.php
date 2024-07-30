@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use App\Models\promotion;
 use App\Models\room;
+use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
@@ -42,6 +44,7 @@ class CartController extends Controller
 
 
         $room = room::query()->findOrFail(\request('room_id'));
+        $sale = promotion::query()->limit(4)->get();
 
 
         return view('booking', compact(
@@ -52,7 +55,8 @@ class CartController extends Controller
             'checkInDate',
             'checkOutDate',
             'dayCount',
-            'room'
+            'room',
+            'sale'
         ));
 
         // $room = room::query()->findOrFail(\request('room_id'));
@@ -66,12 +70,32 @@ class CartController extends Controller
 
     }
 
+    public function applyDiscount(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+            'total_price' => 'required|numeric'
+        ]);
+
+        $discountCode = promotion::isValid($request->code);
+
+        if (!$discountCode) {
+            return response()->json(['message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn!'], 400);
+        }
+
+        $discountAmount = ($request->total_price * $discountCode->discount_rate) / 100;
+        $newTotalPrice = $request->total_price - $discountAmount;
+
+        return response()->json(['new_total_price' => $newTotalPrice]);
+
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Cart $cart)
     {
-        //
+
     }
 
     /**
