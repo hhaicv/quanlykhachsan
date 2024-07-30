@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\BannerController;
-use App\Http\Controllers\RoomTypeController;
-use App\Http\Controllers\PromotionController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\TagController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PromotionController;
+use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')
@@ -67,5 +67,11 @@ Route::prefix('admin')
                 Route::get('{id}/edit',         [ServiceController::class, 'edit'])->name('edit');
                 Route::put('{id}/update',       [ServiceController::class, 'update'])->name('update');
                 Route::get('{id}/destroy',      [ServiceController::class, 'destroy'])->name('destroy');
+            });
+        Route::resource('users', UserController::class);
+        Route::prefix('users')
+            ->as('users.')
+            ->group(function () {
+                Route::get('{id}/destroy',      [UserController::class, 'destroy'])->name('destroy');
             });
     });

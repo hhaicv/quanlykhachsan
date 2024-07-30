@@ -35,7 +35,7 @@
                 </form>
                 <p>
                     @if (Route::has('password.request'))
-                        <a class="nav-link" href="{{ route('password.request') }}">
+                        <a style="color: red" class="nav-link" href="{{ route('password.request') }}">
                             {{ __('Forgot Your Password?') }}
                         </a>
                     @endif

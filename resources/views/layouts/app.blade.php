@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,19 +8,20 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>    Skyline</title>
+    <title>@yield('title')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 
 
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,700,900" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900"
+        rel="stylesheet">
     <!-- CSS LIBRARY -->
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/client/css/font-awesome.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/client/css/ionicons.min.css') }}">
@@ -28,83 +30,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/client/css/vit-gallery.css') }}">
     <link rel="shortcut icon" type="text/css" href="{{ asset('theme/client/images/favicon.png') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/client/css/bootstrap-select.min.css') }}">
+    <script src="https://kit.fontawesome.com/24d8b82fa8.js" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="{{ asset('theme/client/css/styles.css') }}">
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar-expand-md navbar-light bg-black shadow-sm">
-            <div class="container">
-                <a class="navbar-brand text-light" href="{{ url('/') }}">
-                    Skyline
-                </a>
-                <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    @include('layouts.header');
+    @yield('content')
+    @include('layouts.footer')
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto float-end">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link text-light" href="{{ route('login') }}">Đăng Nhập</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="ms-4 nav-link text-light" href="{{ route('register') }}">Đăng Ký</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-light" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-
-        <main>
-            @yield('content')
-        </main>
-    </div>
-    <script type="text/javascript" src="{{ asset('theme/client/js/jquery-1.12.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/owl.carousel.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/vit-gallery.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/jquery.countTo.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/jquery.appear.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/isotope.pkgd.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/bootstrap-select.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('theme/client/js/jquery.littlelightbox.js') }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDyCxHyc8z9gMA5IlipXpt0c33Ajzqix4"></script>
-    <!-- Custom jQuery -->
-    <script type="text/javascript" src="{{ asset('theme/client/js/sky.js') }}"></script>
 </body>
 
 </html>

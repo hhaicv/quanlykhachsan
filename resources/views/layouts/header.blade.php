@@ -25,6 +25,9 @@
                             {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
+                            @if (Auth::user()->type==App\Models\User::TYPE_ADMIN)
+                            <li><a href="{{ route('admin.dashboard') }}" title="">Admin</a></li>
+                            @endif
                             <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -34,11 +37,7 @@
                                     @csrf
                                 </form>
                             </li>
-                            {{-- <li><a href="room_2.html" title="">Room 2</a></li>
-                            <li><a href="room_3.html" title="">Room 3</a></li>
-                            <li><a href="room_4.html" title="">Room 4</a></li>
-                            <li><a href="room_5.html" title="">Room 5</a></li>
-                            <li><a href="room_6.html" title="">Room 6</a></li> --}}
+                            {{-- {{-- <li><a href="room_2.html" title="">Room 2</a></li> --}}
                         </ul>
                     </li>
                 @endguest
@@ -58,28 +57,25 @@
                         <span class="icon-bar "></span>
                         <span class="icon-bar "></span>
                     </button>
-                    <a class="navbar-brand" href="file:///E:/Xampp/htdocs/skyline/index.html" title="Skyline"><img
+                    <a class="navbar-brand" href="{{ route('/') }}" title="Skyline"><img
                             src="{{ asset('theme/client/images/Home-1/sky-logo-header.png') }}" alt="#"></a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="index.html" title="Home" data-toggle="dropdown">Trang chủ</a>
+                            <a href="{{ route('/') }}" title="Home">Trang chủ</a>
                         </li>
                         <li class="dropdown ">
-                            <a href="room_1.html" title="Room & Rate" class="dropdown-toggle"
+                            <a href="#" title="Room & Rate" class="dropdown-toggle"
                                 data-toggle="dropdown">Phòng<b class="caret"></b></a>
                             <ul class="dropdown-menu icon-fa-caret-up submenu-hover">
-                                <li><a href="room_1.html" title="">Room 1</a></li>
-                                <li><a href="room_2.html" title="">Room 2</a></li>
-                                <li><a href="room_3.html" title="">Room 3</a></li>
-                                <li><a href="room_4.html" title="">Room 4</a></li>
-                                <li><a href="room_5.html" title="">Room 5</a></li>
-                                <li><a href="room_6.html" title="">Room 6</a></li>
+                                @foreach (App\Models\room::query()->get() as $item)
+                                <li><a href="{{ route('show', $item->id) }}" title="">{{ $item->name }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
-                        <li><a href="about.html" title="About">Giới Thiệu</a></li>
-                        <li><a href="contact.html" title="Contact">Liện Hệ</a></li>
+                        <li><a href="#" title="About">Giới Thiệu</a></li>
+                        <li><a href="#" title="Contact">Liện Hệ</a></li>
                     </ul>
                 </div>
             </div>

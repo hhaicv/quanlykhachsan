@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('room_id')->constrained();
-            $table->date('check_in_date');
-            $table->date('check_out_date');
-            $table->integer('total_price');
             $table->foreignId('promotion_id')->nullable()->constrained();
+            $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('note')->nullable();
+            $table->integer('total_price');
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
         });

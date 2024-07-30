@@ -819,12 +819,11 @@
                         aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
                             <img class="rounded-circle header-profile-user"
-                                src="{{ asset('theme/admin/assets/images/users/avatar-1.jpg') }}"
+                                src=" {{ Storage::url(Auth::user()->image) }}"
                                 alt="Header Avatar">
                             <span class="text-start ms-xl-2">
-                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">Anna
-                                    Adame</span>
-                                <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">Founder</span>
+                                <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">  {{ Auth::user()->name }}</span>
+                                <span class="d-none d-xl-block ms-1 fs-12 user-name-sub-text">  {{ Auth::user()->type }}</span>
                             </span>
                         </span>
                     </button>
