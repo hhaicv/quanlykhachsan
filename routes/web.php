@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -25,9 +26,11 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/'
 Route::get('{id}/show',         [HomeController::class, 'show'])->name('show');
 Route::get('room',         [HomeController::class, 'room'])->name('room');
 Route::get('cart',         [CartController::class, 'cart'])->name('cart');
-// Route::get('booking',         [HomeController::class, 'booking'])->name('booking');
-Route::post('/apply-discount', [CartController::class, 'applyDiscount']);
+
 Auth::routes();
+
+Route::post('/apply-discount', [BookingController::class, 'applyDiscount'])->name('apply-discount');
+Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 // Route::get('/', function () {
 

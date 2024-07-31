@@ -25,7 +25,7 @@ return new class extends Migration
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->string('note')->nullable();
-            $table->integer('total_price');
+            $table->integer('new_total_price');
             $table->enum('status', ['pending', 'confirmed', 'cancelled'])->default('pending');
             $table->timestamps();
         });

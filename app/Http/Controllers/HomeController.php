@@ -47,9 +47,5 @@ class HomeController extends Controller
     }
 
 
-    // public function booking()
-    // {
-    //     // $cart = Cart::qu;
-    //     return view('booking');
-    // }
+   
 }

@@ -26,17 +26,14 @@
                 </div>
                 <!-- END / STEP -->
                 <div class="row">
-                    <form action="" method="POST">
+                    <form action="{{ route('booking.store') }}" method="POST">
                         @csrf
                         <input type="hidden" name="room_id" value="{{ $room->id }}">
                         <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                         <div class="col-md-4 col-lg-3">
                             <div class="reservation-sidebar">
-                                <!-- RESERVATION DATE -->
                                 <div class="reservation-date">
-                                    <!-- HEADING -->
                                     <h2 class="reservation-heading">Dates</h2>
-                                    <!-- END / HEADING -->
                                     <ul>
                                         <input type="hidden" name="check_in_date" value="{{ $check_in_date }}">
                                         <input type="hidden" name="check_out_date" value="{{ $check_out_date }}">
@@ -56,15 +53,11 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <!-- END / RESERVATION DATE -->
-                                <!-- ROOM SELECT -->
-                                <div class="reservation-room-selected selected-4 ">
-                                    <!-- HEADING -->
+                                <div class="reservation-room-selected selected-4">
                                     <h2 class="reservation-heading">Rooms</h2>
-                                    <!-- END / HEADING -->
-                                    <!-- ITEM -->
                                     <div class="reservation-room-seleted_item">
-                                        <h6>Room</h6> <span class="reservation-option">{{ $room->max_people }}</span>
+                                        <h6>Room</h6>
+                                        <span class="reservation-option">{{ $room->max_people }}</span>
                                         <div class="reservation-room-seleted_name has-package">
                                             <h2><a href="#">{{ $room->name }}</a></h2>
                                         </div>
@@ -85,7 +78,6 @@
                                                     <span>Dịch Vụ</span>
                                                     <span>Free</span>
                                                 </li>
-
                                             </ul>
                                         </div>
                                         <div class="reservation-room-seleted_total-room">
@@ -93,21 +85,18 @@
                                             @php
                                                 $totalPrice = $room->price * $dayCount;
                                             @endphp
-                                            <span class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
-
-
+                                            <span
+                                                class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
                                         </div>
-
                                         <div class="reservation-room-seleted_total-room">
                                             Tổng Tiền
                                             <span id="total-price"
                                                 class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
                                             <input type="hidden" id="discount-amount" name="discount_amount">
+                                            <input type="hidden" id="new-total-price" name="new_total_price" value="{{ $totalPrice }}">
 
                                         </div>
                                     </div>
-                                    <!-- END / ITEM -->
-                                    <!-- ITEM -->
                                     <div class="reservation-room-seleted_item">
                                         <div class="reservation-room-seleted_package">
                                             <h6>Hình ảnh</h6>
@@ -115,14 +104,10 @@
                                             <a href="#"><img style="height: 180px;object-fit: cover;"
                                                     src="{{ Storage::url($room->cover) }}" alt="#"></a>
                                         </div>
-                                        <!-- END / ROOM SELECT -->
                                     </div>
-                                    <!-- END / TOTAL -->
                                 </div>
-                                <!-- END / ROOM SELECT -->
                             </div>
                         </div>
-
                         <div class="col-md-8 col-lg-9">
                             <div class="reservation_content">
                                 <div class="reservation-billing-detail">
@@ -132,7 +117,6 @@
                                         value="{{ Auth::user()->name }}">
                                     <label>Địa Chỉ<sup> *</sup></label>
                                     <input type="text" class="input-text" name="address" placeholder="Địa chỉ">
-
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Email<sup> *</sup></label>
@@ -148,8 +132,8 @@
                                     <div class="row">
                                         <div class="col-sm-9">
                                             <label>Mã Khuyến Mại</label>
-                                            <input type="text" class="input-text" name="promotion_id " id="discount-code"
-                                                placeholder="Mã Khuyến Mãi">
+                                            <input type="text" class="input-text" name="promotion_id"
+                                                id="discount-code" placeholder="Mã Khuyến Mãi">
                                         </div>
                                         <div class="col-sm-3">
                                             <button type="button" class="btn btn-room btn3" onclick="applyDiscount()">Áp
@@ -158,7 +142,6 @@
                                     </div>
                                     <label>Ghi Chú</label>
                                     <textarea class="input-textarea" name="note" placeholder="Ghi chú về phòng của bạn"></textarea>
-
                                     <ul class="option-bank">
                                         <li>
                                             <label class="label-radio">
@@ -166,10 +149,8 @@
                                                 Transfer
                                             </label>
                                             <p>Make your payment directly into our bank account. Please use your Order ID as
-                                                the
-                                                payment reference. Your order won’t be shipped until the funds have cleared
-                                                in
-                                                our account.</p>
+                                                the payment reference. Your order won’t be shipped until the funds have
+                                                cleared in our account.</p>
                                         </li>
                                         <li>
                                             <label class="label-radio">
@@ -195,15 +176,13 @@
                                                     alt="#"></a>
                                         </li>
                                     </ul>
-
                                     <button class="btn btn-room btn4">PLACE ORDER</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-
-                    <!-- END / CONTENT -->
                 </div>
+
             </div>
         </div>
     </section>
@@ -235,11 +214,12 @@
 
                 const data = await response.json();
                 const totalPriceElement = document.getElementById('total-price');
+                const newTotalPriceInput = document.getElementById('new-total-price');
+
                 if (totalPriceElement) {
-                    totalPrice = data.new_total_price; // Cập nhật giá trị mới cho totalPrice
                     const formattedPrice = data.new_total_price.toLocaleString('vi-VN');
                     totalPriceElement.innerText = `${formattedPrice} VND`;
-                    console.log(alert("Mã giảm giá được thêm thành công"));
+                    newTotalPriceInput.value = data.new_total_price;
                 } else {
                     console.error('Không tìm thấy phần tử với ID "total-price"');
                 }
