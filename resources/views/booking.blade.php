@@ -151,8 +151,8 @@
                                             </label>
                                         </li>
                                     </ul>
-                                    <button type="submit" name="cod" class="btn btn-room btn4" value="cod">Thanh Toán COD</button>
-                                    <button type="submit" name="payUrl" class="btn btn-room btn4" value="payUrl">Thanh Toán MOMO ATM</button>
+                                    {{-- <button type="submit" name="cod" class="btn btn-room btn4" value="cod">Thanh Toán COD</button> --}}
+                                    <button type="submit" name="payUrl" class="btn btn-room btn4" value="payUrl">MOMO ATM</button>
                                 </div>
                             </div>
                         </div>

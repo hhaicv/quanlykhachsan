@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderCreated;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Payment;
@@ -64,6 +65,7 @@ class MoMoController extends Controller {
                 'children' => $request->children,
                 'new_total_price' => $amount,
             ]);
+            event(new OrderCreated($order));
 
             // Save payment information
             Payment::create([
