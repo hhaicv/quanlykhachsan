@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCartRequest;
+use Illuminate\Http\Request;
+use App\Models\promotion;
 use App\Models\room;
 
 class CartController extends Controller
@@ -30,5 +32,23 @@ class CartController extends Controller
             'dayCount',
             'room',
         ));
+    }
+    public function applyDiscount(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+            'total_price' => 'required|numeric'
+        ]);
+
+        $discountCode = promotion::isValid($request->code);
+
+        if (!$discountCode) {
+            return response()->json(['message' => 'Mã giảm giá không hợp lệ hoặc đã hết hạn!'], 400);
+        }
+
+        $discountAmount = ($request->total_price * $discountCode->discount_rate) / 100;
+        $newTotalPrice = $request->total_price - $discountAmount;
+
+        return response()->json(['new_total_price' => $newTotalPrice]);
     }
 }

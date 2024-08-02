@@ -8,32 +8,31 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    const STATUS_ORDER = [
-        'pending' => 'Chờ xác nhận',
-        'confirmed' => 'Đã xác nhận',
-        'canceled' => 'Phòng đã bị hủy',
-    ];
-
-    const STATUS_PAYMENT = [
-        'unpaid' => 'Chưa thanh toán',
-        'paid' => 'Đã thanh toán',
-    ];
-
-    const STATUS_ORDER_PENDING = 'pending';
-    const STATUS_ORDER_CONFIRMED = 'confirmed';
-    const STATUS_ORDER_CANCELED = 'canceled';
-    const STATUS_PAYMENT_UNPAID = 'unpaid';
-    const STATUS_PAYMENT_PAID = 'paid';
-
     protected $fillable = [
         'user_id',
-        'user_name',
-        'user_email',
-        'user_phone',
-        'user_address',
-        'user_note',
-        'status_order',
-        'status_payment',
-        'total_price',
+        'room_id',
+        'promotion_id',
+        'name',
+        'address',
+        'email',
+        'phone',
+        'note',
+        'check_in_date',
+        'check_out_date',
+        'adults',
+        'children',
+        'new_total_price',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+
+    public function room() {
+        return $this->belongsTo(Room::class);
+    }
+
+    public function payments() {
+        return $this->hasMany(Payment::class);
+    }
 }

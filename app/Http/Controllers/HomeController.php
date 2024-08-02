@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\banner;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\Payment;
 use App\Models\room;
 use Illuminate\Http\Request;
 
@@ -48,8 +50,9 @@ class HomeController extends Controller
 
     public function thanks()
     {
-        return view('thanks');
+        $payment = Payment::query()->where('transaction_id', request()->orderId)->first();
+        $order = Order::query()->where('id', $payment->order_id)->first();
+        $room = room::query()->where('id', $order->room_id)->first();
+        return view('thanks', compact('payment', 'order', 'room'));
     }
-
-
 }

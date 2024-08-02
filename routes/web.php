@@ -18,25 +18,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     $rooms = \App\Models\room::query()->get();
-//     $service = \App\Models\Service::query()->get();
-//     return view('client.home.index', compact('service', 'rooms'));
-// });
+
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('{id}/show',         [HomeController::class, 'show'])->name('show');
 Route::get('room',         [HomeController::class, 'room'])->name('room');
-Route::get('cart',         [CartController::class, 'cart'])->name('cart')->middleware('auth');
 
 Auth::routes();
 
-Route::post('/apply-discount', [BookingController::class, 'applyDiscount'])->name('apply-discount');
-Route::post('store', [BookingController::class, 'store'])->name('store');
+Route::get('cart',         [CartController::class, 'cart'])->name('cart')->middleware('auth');
+Route::post('/apply-discount', [CartController::class, 'applyDiscount'])->name('apply-discount');
 
-Route::post('online_checkout', [MoMoController::class, 'online_checkout'])->name('online_checkout');
 
-Route::get('thanks',         [HomeController::class, 'thanks'])->name('thanks');
+Route::post('/online-checkout', [MoMoController::class, 'online_checkout'])->name('online_checkout');
+Route::post('/momo-ipn', [MoMoController::class, 'momo_ipn'])->name('momo_ipn');
+Route::get('/thanks',         [HomeController::class, 'thanks'])->name('thanks');
+
+
+
+
+
 
 // Route::get('thanks', function () {
 // echo "thank công";
 // });
+
+// Route::post('online_checkout', [MoMoController::class, 'online_checkout'])->name('online_checkout');
+
+// Route::get('thanks',         [HomeController::class, 'thanks'])->name('thanks');
+
+// Route::post('store', [BookingController::class, 'store'])->name('store');
+
