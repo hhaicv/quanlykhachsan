@@ -34,7 +34,7 @@
                             <div class="product-detail_total">
                                 <img src="{{ asset('theme/client/images/Product/icon.png') }}" alt="#"
                                     class="icon-logo">
-                                <h6>STARTING ROOM FROM</h6>
+                                <h6>GIÁ CHỈ TỪ</h6>
                                 <p class="price">
                                     <span class="">{{ number_format($data->price, 0, ',', '.') }}VNĐ/Đêm
                                 </p>
@@ -47,22 +47,22 @@
                                         <div class="widget widget_check_availability">
                                             <div class="check_availability">
                                                 <div class="check_availability-field">
-                                                    <label>Arrive</label>
+                                                    <label>Ngày bắt đầu</label>
                                                     <div class="input-group date" data-date-format="dd-mm-yyyy"
                                                         id="datepicker1">
-                                                        <input name="check_in_date" class="form-control wrap-box" type="date">
+                                                        <input name="check_in_date" class="form-control wrap-box" type="date" required>
 
                                                     </div>
                                                 </div>
                                                 <div class="check_availability-field">
-                                                    <label>Depature</label>
+                                                    <label>Ngày kết thúc</label>
                                                     <div id="datepicker2" class="input-group date"
                                                         data-date-format="dd-mm-yyyy">
-                                                        <input name="check_out_date" class="form-control wrap-box" type="date">
+                                                        <input name="check_out_date" class="form-control wrap-box" type="date" required>
                                                     </div>
                                                 </div>
                                                 <div class="check_availability-field">
-                                                    <label>Adult</label>
+                                                    <label>Người Lớn</label>
                                                     <select class="awe-select" name="adult">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>
@@ -71,7 +71,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="check_availability-field">
-                                                    <label>Chirld</label>
+                                                    <label>Trẻ Con</label>
                                                     <select class="awe-select" name="children">
                                                         <option value="1">1</option>
                                                         <option value="2">2</option>

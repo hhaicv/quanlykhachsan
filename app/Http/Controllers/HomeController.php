@@ -46,6 +46,10 @@ class HomeController extends Controller
         return view('show', compact('data', 'list'));
     }
 
+    public function thanks()
+    {
+        return view('thanks');
+    }
 
-   
+
 }
