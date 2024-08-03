@@ -6,13 +6,13 @@
     <section class="section-slider height-v">
         <div id="index12" class="owl-carousel  owl-theme">
             @foreach ($banners as $item)
-            <div class="item">
-                <img alt="Third slide" src="{{ Storage::url($item->image_url) }}" class="img-responsive">
-                <div class="carousel-caption">
-                    <h1>Welcome to Skyline</h1>
-                    <p><span class="line-t"></span>Hotels & Resorts <span class="line-b"></span></p>
+                <div class="item">
+                    <img alt="Third slide" src="{{ Storage::url($item->image_url) }}" class="img-responsive">
+                    <div class="carousel-caption">
+                        <h1>Welcome to Skyline</h1>
+                        <p><span class="line-t"></span>Hotels & Resorts <span class="line-b"></span></p>
+                    </div>
                 </div>
-            </div>
             @endforeach
 
 
@@ -120,7 +120,8 @@
             </div>
         </div>
         <div class="text-center">
-            <button type="button" class="btn btn-default btn-our" style="padding: 10px 40px"><a href="{{ route('room') }}" class="nav-link">VIEW MORE</a></button>
+            <button type="button" class="btn btn-default btn-our" style="padding: 10px 40px"><a href="{{ route('room') }}"
+                    class="nav-link">VIEW MORE</a></button>
         </div>
         <!-- /container -->
     </section>
@@ -175,8 +176,6 @@
                         </div>
                     </div>
                 @endforeach
-
-
             </div>
         </div>
     </section>

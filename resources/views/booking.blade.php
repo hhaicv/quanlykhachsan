@@ -80,20 +80,24 @@
                                             @php
                                                 $totalPrice = $room->price * $dayCount;
                                             @endphp
-                                            <span class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
+                                            <span
+                                                class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
                                         </div>
                                         <div class="reservation-room-seleted_total-room">
                                             Tổng Tiền
-                                            <span id="total-price" class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
+                                            <span id="total-price"
+                                                class="reservation-amout">{{ number_format($totalPrice, 0, ',', '.') }}VND</span>
                                             <input type="hidden" id="discount-amount" name="discount_amount">
-                                            <input type="hidden" id="new-total-price" name="new_total_price" value="{{ $totalPrice }}">
+                                            <input type="hidden" id="new-total-price" name="new_total_price"
+                                                value="{{ $totalPrice }}">
                                         </div>
                                     </div>
                                     <div class="reservation-room-seleted_item">
                                         <div class="reservation-room-seleted_package">
                                             <h6>Hình ảnh</h6>
                                             <br>
-                                            <a href="#"><img style="height: 180px; object-fit: cover;" src="{{ Storage::url($room->cover) }}" alt="#"></a>
+                                            <a href="#"><img style="width: 235px; object-fit: cover;"
+                                                    src="{{ Storage::url($room->cover) }}" alt="#"></a>
                                         </div>
                                     </div>
                                 </div>
@@ -104,17 +108,20 @@
                                 <div class="reservation-billing-detail">
                                     <h4>Thông tin đặt phòng</h4>
                                     <label>Tên Khách Hàng<sup> *</sup></label>
-                                    <input type="text" class="input-text" name="name" placeholder="Tên khách hàng" value="{{ Auth::user()->name }}">
+                                    <input type="text" class="input-text" name="name" placeholder="Tên khách hàng"
+                                        value="{{ Auth::user()->name }}">
                                     <label>Địa Chỉ<sup> *</sup></label>
                                     <input type="text" class="input-text" name="address" placeholder="Địa chỉ">
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <label>Email<sup> *</sup></label>
-                                            <input type="email" class="input-text" name="email" placeholder="Email" value="{{ Auth::user()->email }}">
+                                            <input type="email" class="input-text" name="email" placeholder="Email"
+                                                value="{{ Auth::user()->email }}">
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Số điện thoại<sup> *</sup></label>
-                                            <input type="number" class="input-text" name="phone" placeholder="Số điện thoại" value="{{ old('phone') }}">
+                                            <input type="number" class="input-text" name="phone"
+                                                placeholder="Số điện thoại" value="{{ old('phone') }}">
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -125,34 +132,56 @@
                                     <div class="row">
                                         <div class="col-sm-9">
                                             <label>Mã Khuyến Mại</label>
-                                            <input type="text" class="input-text" name="promotion_id" id="discount-code" placeholder="Mã Khuyến Mãi">
+                                            <input type="text" class="input-text" name="promotion_id" id="discount-code"
+                                                placeholder="Mã Khuyến Mãi">
                                         </div>
                                         <div class="col-sm-3">
-                                            <button type="button" class="btn btn-room btn3" onclick="applyDiscount()">Áp dụng</button>
+                                            <button type="button" class="btn btn-room btn3" onclick="applyDiscount()">Áp
+                                                dụng</button>
                                         </div>
                                     </div>
                                     <label>Ghi Chú</label>
                                     <textarea class="input-textarea" name="note" placeholder="Ghi chú về phòng của bạn"></textarea>
-                                    <ul class="option-bank">
-                                        <li>
-                                            <label class="label-radio">
-                                                <input type="radio" class="input-radio" name="chose-bank"> Direct Bank Transfer
-                                            </label>
-                                            <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
-                                        </li>
-                                        <li>
-                                            <label class="label-radio">
-                                                <input type="radio" class="input-radio" name="chose-bank"> Cheque Payment
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <label class="label-radio">
-                                                <input type="radio" class="input-radio" name="payment_method" value="MOMO"> MoMo ATM
-                                            </label>
-                                        </li>
-                                    </ul>
+                                    <div class="best">
+                                        <div class="row" style="margin-top: 20px">
+                                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                                <div class="wrap-best">
+                                                    <div class="icon-best">
+                                                        <img width="80px"
+                                                            src="{{ asset('theme/client/images/logo/momo.png') }}"
+                                                            class="img-responsive" alt="Image">
+                                                    </div>
+                                                    <h6 class="sky-h6">MOMO</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                                <div class="wrap-best">
+                                                    <div class="icon-best">
+                                                        <img width="80px"
+                                                            src="{{ asset('theme/client/images/logo/vnpay.png') }}"
+                                                            class="img-responsive" alt="Image">
+                                                    </div>
+                                                    <h6 class="sky-h6">VNPAY</h6>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                                <div class="wrap-best">
+                                                    <div class="icon-best">
+                                                        <img width="80px"
+                                                            src="{{ asset('theme/client/images/logo/zalo.png') }}"
+                                                            class="img-responsive" alt="Image">
+                                                    </div>
+                                                    <h6 class="sky-h6">ZALOPAY</h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     {{-- <button type="submit" name="cod" class="btn btn-room btn4" value="cod">Thanh Toán COD</button> --}}
-                                    <button type="submit" name="payUrl" class="btn btn-room btn4" value="payUrl">MOMO ATM</button>
+                                    <button type="submit" name="payUrl" class="btn btn-room btn4" value="payUrl">MOMO
+                                        ATM</button>
+                                    <button disabled style="margin-left: 15px" class="btn btn-room btn4">VNPAY</button>
+                                    <button disabled style="margin-left: 15px" class="btn btn-room btn4">ZALOPAY</button>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +203,8 @@
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
                     },
                     body: JSON.stringify({
                         code: discountCode,

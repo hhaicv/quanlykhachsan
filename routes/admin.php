@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\PromotionController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -73,5 +74,13 @@ Route::prefix('admin')
             ->as('users.')
             ->group(function () {
                 Route::get('{id}/destroy',      [UserController::class, 'destroy'])->name('destroy');
+            });
+
+            
+        Route::resource('payment', PaymentController::class);
+        Route::prefix('payment')
+            ->as('payment.')
+            ->group(function () {
+                Route::get('{id}/destroy',      [PaymentController::class, 'destroy'])->name('destroy');
             });
     });
